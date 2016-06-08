@@ -1,0 +1,29 @@
+{
+  "generator-angularjs-library": {
+    "props": {
+      "author": {
+        "name": "Guilherme Pacheco",
+        "email": "guilherme.f.pacheco@gmail.com"
+      },
+      "libraryName": {
+        "original": "angular-bulma",
+        "camelized": "angularBulma",
+        "dasherized": "angular-bulma",
+        "slugified": "angular-bulma",
+        "parts": [
+          "angular",
+          "bulma"
+        ]
+      },
+      "includeModuleDirectives": true,
+      "includeModuleFilters": false,
+      "includeModuleServices": false,
+      "includeAngularModuleResource": false,
+      "includeAngularModuleCookies": false,
+      "includeAngularModuleSanitize": false,
+      "librarySrcDirectory": "src/angular-bulma",
+      "libraryUnitTestDirectory": "test/unit/angular-bulma",
+      "libraryUnitE2eDirectory": "test/e2e/angular-bulma"
+    }
+  }
+}
