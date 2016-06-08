@@ -7,7 +7,9 @@
       "email": "guilherme.f.pacheco@gmail.com"
     }
   ],
-  "main": ["dist/angular-bulma.js"],
+  "main": [
+    "dist/angular-bulma.js"
+  ],
   "ignore": [
     "src",
     "test",
@@ -15,7 +17,9 @@
     "karma-*.conf.js",
     "**/.*"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "bulma": "^0.0.28"
+  },
   "devDependencies": {
     "angular-mocks": ">=1.2.0",
     "angular-scenario": ">=1.2.0",
