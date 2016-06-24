@@ -22,10 +22,8 @@ var sourceDirectory = path.join(rootDirectory, './src');
 var testDirectory = path.join(rootDirectory, './test/unit');
 
 var sourceFiles = [
-
   // Make sure module files are handled first
   path.join(sourceDirectory, '/**/*.module.js'),
-
   // Then add all JavaScript files
   path.join(sourceDirectory, '/**/*.js')
 ];
@@ -57,10 +55,8 @@ gulp.task('process-all', function (done) {
  * Watch task
  */
 gulp.task('watch', function () {
-
   // Watch JavaScript files
   gulp.watch(sourceFiles, ['process-all']);
-
   // watch test files and re-run unit tests when changed
   gulp.watch(path.join(testDirectory, '/**/*.js'), ['test-src']);
 });

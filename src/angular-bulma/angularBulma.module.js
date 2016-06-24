@@ -6,16 +6,15 @@
 
   // Config
   angular.module('angularBulma.config', [])
-      .value('angularBulma.config', {
-          debug: true
-      });
+    .value('angularBulma.config', {
+      debug: true
+    });
 
   // Modules
   angular.module('angularBulma.directives', []);
-  angular.module('angularBulma',
-      [
-          'angularBulma.config',
-          'angularBulma.directives'
-      ]);
+  angular.module('angularBulma', [
+    'angularBulma.config',
+    'angularBulma.directives'
+  ]);
 
 })(angular);
