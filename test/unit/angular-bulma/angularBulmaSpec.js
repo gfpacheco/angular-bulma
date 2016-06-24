@@ -1,6 +1,6 @@
 'use strict';
 
-describe('', function() {
+describe('angularBulma', function() {
 
   var module;
   var dependencies;
