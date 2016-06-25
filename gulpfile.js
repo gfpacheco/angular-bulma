@@ -1,5 +1,8 @@
+// Prevent bluebird warnings
+process.env['BLUEBIRD_WARNINGS'] = 0;
+
 var gulp = require('gulp');
-var karma = require('karma').server;
+var KarmaServer = require('karma').Server;
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -76,30 +79,30 @@ gulp.task('jshint', function () {
  * Run test once and exit
  */
 gulp.task('test-src', function (done) {
-  karma.start({
+  new KarmaServer({
     configFile: __dirname + '/karma-src.conf.js',
     singleRun: true
-  }, done);
+  }, done).start();
 });
 
 /**
  * Run test once and exit
  */
 gulp.task('test-dist-concatenated', function (done) {
-  karma.start({
+  new KarmaServer({
     configFile: __dirname + '/karma-dist-concatenated.conf.js',
     singleRun: true
-  }, done);
+  }, done).start();
 });
 
 /**
  * Run test once and exit
  */
 gulp.task('test-dist-minified', function (done) {
-  karma.start({
+  new KarmaServer({
     configFile: __dirname + '/karma-dist-minified.conf.js',
     singleRun: true
-  }, done);
+  }, done).start();
 });
 
 gulp.task('default', function () {
