@@ -1,14 +1,12 @@
 {
   "name": "angular-bulma",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "author": {
     "name": "Guilherme Pacheco",
     "email": "guilherme.f.pacheco@gmail.com"
   },
   "dependencies": {
-    "jasmine-core": "^2.4.1",
-    "jshint": "^2.9.2",
-    "lolex": "^1.5.0"
+    "bulma": "^0.0.28"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -19,7 +17,10 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.4",
+    "jasmine-core": "^2.4.1",
+    "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
+    "lolex": "^1.5.0",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-chai-jquery": "^1.0.0",

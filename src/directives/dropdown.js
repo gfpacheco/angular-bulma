@@ -1,6 +1,7 @@
 (function (angular) {
 
-  angular.module('angularBulma.directives.dropdown', [])
+  angular
+    .module('bulma.directives')
     .directive('buDropdown', buDropdown);
 
   function buDropdown() {

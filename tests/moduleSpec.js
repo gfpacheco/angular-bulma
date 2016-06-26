@@ -1,6 +1,6 @@
 'use strict';
 
-describe('angularBulma.directives', function() {
+describe('bulma', function() {
 
   var module;
   var dependencies;
@@ -12,12 +12,12 @@ describe('angularBulma.directives', function() {
 
   beforeEach(function() {
     // Get module
-    module = angular.module('angularBulma.directives');
+    module = angular.module('bulma');
     dependencies = module.requires;
   });
 
-  it('should load dropdown module', function() {
-    expect(hasModule('angularBulma.directives.dropdown')).to.be.ok;
+  it('should load directives module', function() {
+    expect(hasModule('bulma.directives')).to.be.ok;
   });
 
 });

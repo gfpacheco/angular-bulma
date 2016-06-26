@@ -22,11 +22,11 @@ var rootDirectory = path.resolve('./');
 var sourceDirectory = path.join(rootDirectory, './src');
 
 // tests
-var testDirectory = path.join(rootDirectory, './test/unit');
+var testDirectory = path.join(rootDirectory, './tests');
 
 var sourceFiles = [
   // Make sure module files are handled first
-  path.join(sourceDirectory, '/**/*.module.js'),
+  path.join(sourceDirectory, '/**/module.js'),
   // Then add all JavaScript files
   path.join(sourceDirectory, '/**/*.js')
 ];
@@ -103,6 +103,10 @@ gulp.task('test-dist-minified', function (done) {
     configFile: __dirname + '/karma-dist-minified.conf.js',
     singleRun: true
   }, done).start();
+});
+
+gulp.task('test-all', function () {
+  runSequence('process-all', 'test-dist-concatenated', 'test-dist-minified');
 });
 
 gulp.task('default', function () {

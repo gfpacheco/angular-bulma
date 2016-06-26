@@ -1,8 +1,8 @@
 'use strict';
 
-describe('angularBulma.directives.dropdown', function() {
+describe('bulma.directives.dropdown', function() {
 
-  beforeEach(module('angularBulma.directives.dropdown'));
+  beforeEach(module('bulma.directives'));
 
   var $compile;
   var $rootScope;

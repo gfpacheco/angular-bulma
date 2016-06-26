@@ -22,10 +22,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower/angular/angular.js',
-      'bower/angular-mocks/angular-mocks.js',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
       'dist/angular-bulma.min.js',
-      'test/unit/**/*.js'
+      'tests/**/*.js'
     ],
 
     // list of files to exclude
