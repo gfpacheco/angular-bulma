@@ -6,36 +6,42 @@ var KarmaServer = require('karma').Server;
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var bump = require('gulp-bump');
+var git = require('gulp-git-streamed');
+var filter = require('gulp-filter');
+var tagVersion = require('gulp-tag-version');
 var path = require('path');
 var plumber = require('gulp-plumber');
 var runSequence = require('run-sequence');
 var jshint = require('gulp-jshint');
 
-/**
- * File patterns
- **/
+/*
+** Directories and files
+*/
 
-// Root directory
 var rootDirectory = path.resolve('./');
-
-// Source directory for build process
 var sourceDirectory = path.join(rootDirectory, './src');
-
-// tests
 var testDirectory = path.join(rootDirectory, './tests');
 
 var sourceFiles = [
   // Make sure module files are handled first
   path.join(sourceDirectory, '/**/module.js'),
-  // Then add all JavaScript files
   path.join(sourceDirectory, '/**/*.js')
 ];
 
 var lintFiles = [
   'gulpfile.js',
-  // Karma configuration
   'karma-*.conf.js'
 ].concat(sourceFiles);
+
+var versionFiles = [
+  path.join(rootDirectory, 'package.json'),
+  path.join(rootDirectory, 'bower.json')
+];
+
+/*
+** Lint and build
+*/
 
 gulp.task('build', function() {
   gulp.src(sourceFiles)
@@ -47,27 +53,11 @@ gulp.task('build', function() {
     .pipe(gulp.dest('./dist'));
 });
 
-/**
- * Process
- */
-gulp.task('process-all', function (done) {
+gulp.task('process-all', function(done) {
   runSequence('jshint', 'test-src', 'build', done);
 });
 
-/**
- * Watch task
- */
-gulp.task('watch', function () {
-  // Watch JavaScript files
-  gulp.watch(sourceFiles, ['process-all']);
-  // watch test files and re-run unit tests when changed
-  gulp.watch(path.join(testDirectory, '/**/*.js'), ['test-src']);
-});
-
-/**
- * Validate source JavaScript
- */
-gulp.task('jshint', function () {
+gulp.task('jshint', function() {
   return gulp.src(lintFiles)
     .pipe(plumber())
     .pipe(jshint())
@@ -75,40 +65,75 @@ gulp.task('jshint', function () {
     .pipe(jshint.reporter('fail'));
 });
 
-/**
- * Run test once and exit
- */
-gulp.task('test-src', function (done) {
+/*
+** Test
+*/
+
+gulp.task('test-src', function(done) {
   new KarmaServer({
     configFile: __dirname + '/karma-src.conf.js',
-    singleRun: true
+    sleRun: true
   }, done).start();
 });
 
-/**
- * Run test once and exit
- */
-gulp.task('test-dist-concatenated', function (done) {
+gulp.task('test-dist-concatenated', function(done) {
   new KarmaServer({
     configFile: __dirname + '/karma-dist-concatenated.conf.js',
     singleRun: true
   }, done).start();
 });
 
-/**
- * Run test once and exit
- */
-gulp.task('test-dist-minified', function (done) {
+gulp.task('test-dist-minified', function(done) {
   new KarmaServer({
     configFile: __dirname + '/karma-dist-minified.conf.js',
     singleRun: true
   }, done).start();
 });
 
-gulp.task('test-all', function () {
+gulp.task('test-all', function() {
   runSequence('process-all', 'test-dist-concatenated', 'test-dist-minified');
 });
 
-gulp.task('default', function () {
+/*
+** Releas
+*/
+
+function release(type) {
+  gulp.src(versionFiles)
+    .pipe(bump({ type: type }))
+    .pipe(gulp.dest(rootDirectory))
+    .pipe(git.commit('Version bump'))
+    .pipe(filter('package.json'))
+    .pipe(tagVersion())
+    .pipe(git.push('origin', 'master'))
+    .pipe(git.push('origin', 'master', { args: '--tags' }));
+}
+
+gulp.task('release-patch', function() {
+  release('patch');
+});
+
+gulp.task('release-minor', function() {
+  release('minor');
+});
+
+gulp.task('release-major', function() {
+  release('major');
+});
+
+/*
+** Develop
+*/
+
+gulp.task('watch', function() {
+  gulp.watch(sourceFiles, ['process-all']);
+  gulp.watch(path.join(testDirectory, '/**/*.js'), ['test-src']);
+});
+
+/*
+** Default
+*/
+
+gulp.task('default', function() {
   runSequence('process-all', 'watch');
 });
