@@ -1,9 +1,9 @@
 (function (angular) {
 
   angular.module('angularBulma.directives.dropdown', [])
-    .directive('dropdown', dropdown);
+    .directive('buDropdown', buDropdown);
 
-  function dropdown() {
+  function buDropdown() {
     var directive = {
       restrict: 'E',
       transclude: true,
@@ -12,7 +12,7 @@
       },
       template: '<div class="control">' +
                   '<button class="button" type="button">{{label}}</button>' +
-                  '<div class="dropdown" ng-transclude></div>' +
+                  '<div class="bu-dropdown" ng-transclude></div>' +
                 '<div>'
     };
 
