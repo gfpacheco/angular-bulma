@@ -52,4 +52,23 @@ describe('angularBulma.directives.dropdown', function() {
     expect(dropdown.css('display')).to.equal('block');
   });
 
+  it('Hides the .bu-dropdown div if clicked twice', function() {
+    var element = $compile('<bu-dropdown></bu-dropdown>')($rootScope);
+    $rootScope.$digest();
+    var dropdown = element.find('.bu-dropdown');
+    element.trigger('click');
+    element.trigger('click');
+    expect(dropdown.css('display')).to.equal('none');
+  });
+
+  it('Shows the .bu-dropdown div if clicked tree times', function() {
+    var element = $compile('<bu-dropdown></bu-dropdown>')($rootScope);
+    $rootScope.$digest();
+    var dropdown = element.find('.bu-dropdown');
+    element.trigger('click');
+    element.trigger('click');
+    element.trigger('click');
+    expect(dropdown.css('display')).to.equal('block');
+  });
+
 });

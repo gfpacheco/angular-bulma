@@ -36,7 +36,7 @@
       dropdown.css(css);
 
       function toggleOpen() {
-        dropdown.css('display', 'block');
+        dropdown.css('display', dropdown.css('display') === 'block' ? 'none' : 'block');
       }
     }
   }
