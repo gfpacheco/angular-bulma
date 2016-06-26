@@ -1,12 +1,24 @@
 {
   "name": "angular-bulma",
   "version": "0.0.0",
+  "homepage": "https://github.com/gfpacheco/angular-bulma",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gfpacheco/angular-bulma.git"
+  },
+  "description": "Interactive components using Bulma framework brought to Angular",
   "authors": [
     {
       "name": "Guilherme Pacheco",
       "email": "guilherme.f.pacheco@gmail.com"
     }
   ],
+  "keywords": [
+    "angular",
+    "angularjs",
+    "bulma"
+  ],
+  "license": "MIT",
   "main": [
     "dist/angular-bulma.js"
   ],
@@ -15,7 +27,10 @@
     "test",
     "gulpfile.js",
     "karma-*.conf.js",
-    "**/.*"
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
   ],
   "dependencies": {
     "bulma": "^0.0.28"
