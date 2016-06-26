@@ -33,7 +33,8 @@
       restrict: 'E',
       transclude: true,
       scope: {
-        label: '@'
+        label: '@',
+        align: '@'
       },
       link: link,
       template: '<div class="control">' +
@@ -54,9 +55,14 @@
         display: 'none',
         position: 'absolute',
         top: '100%',
-        left: '0',
         zIndex: '1000'
       };
+
+      if (scope.align === 'right') {
+        css.right = 0;
+      } else {
+        css.left = 0;
+      }
 
       dropdown.css(css);
 

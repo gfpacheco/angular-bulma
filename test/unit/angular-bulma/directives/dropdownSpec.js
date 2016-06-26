@@ -71,4 +71,18 @@ describe('angularBulma.directives.dropdown', function() {
     expect(dropdown.css('display')).to.equal('block');
   });
 
+  it('Aligns the .bu-dropdown div to the left by default', function() {
+    var element = $compile('<bu-dropdown></bu-dropdown>')($rootScope);
+    $rootScope.$digest();
+    var dropdown = element.find('.bu-dropdown');
+    expect(dropdown.css('left')).to.equal('0px');
+  });
+
+  it('Aligns the .bu-dropdown div to the right if told so', function() {
+    var element = $compile('<bu-dropdown align="right"></bu-dropdown>')($rootScope);
+    $rootScope.$digest();
+    var dropdown = element.find('.bu-dropdown');
+    expect(dropdown.css('right')).to.equal('0px');
+  });
+
 });
