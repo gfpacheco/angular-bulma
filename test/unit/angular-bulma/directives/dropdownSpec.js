@@ -20,6 +20,18 @@ describe('angularBulma.directives.dropdown', function() {
     expect(button.text()).to.equal('Label');
   });
 
+  it('Updates the button value if the label property changes', function() {
+    $rootScope.label = 'Label';
+    var element = $compile('<dropdown label="{{label}}"></dropdown>')($rootScope);
+    $rootScope.$digest();
+    var button = element.find('button');
+    expect(button).to.be.ok;
+    expect(button.text()).to.equal('Label');
+    $rootScope.label = 'New label';
+    $rootScope.$digest();
+    expect(button.text()).to.equal('New label');
+  });
+
   it('Wraps the content inside a .dropdown div', function() {
     var element = $compile('<dropdown><p>I\'m inside a dropdown</p></dropdown>')($rootScope);
     $rootScope.$digest();
