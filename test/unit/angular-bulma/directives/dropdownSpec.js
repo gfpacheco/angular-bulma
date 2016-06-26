@@ -16,7 +16,6 @@ describe('angularBulma.directives.dropdown', function() {
     var element = $compile('<bu-dropdown label="Label"></bu-dropdown>')($rootScope);
     $rootScope.$digest();
     var button = element.find('button');
-    expect(button).to.be.ok;
     expect(button.text()).to.equal('Label');
   });
 
@@ -25,7 +24,6 @@ describe('angularBulma.directives.dropdown', function() {
     var element = $compile('<bu-dropdown label="{{label}}"></bu-dropdown>')($rootScope);
     $rootScope.$digest();
     var button = element.find('button');
-    expect(button).to.be.ok;
     expect(button.text()).to.equal('Label');
     $rootScope.label = 'New label';
     $rootScope.$digest();
@@ -36,8 +34,14 @@ describe('angularBulma.directives.dropdown', function() {
     var element = $compile('<bu-dropdown><p>I\'m inside a dropdown</p></bu-dropdown>')($rootScope);
     $rootScope.$digest();
     var dropdown = element.find('.bu-dropdown');
-    expect(dropdown).to.be.ok;
     expect(dropdown.find('p').length).to.equal(1);
+  });
+
+  it('Hides the .bu-dropdown div by default', function() {
+    var element = $compile('<bu-dropdown></bu-dropdown>')($rootScope);
+    $rootScope.$digest();
+    var dropdown = element.find('.bu-dropdown');
+    expect(dropdown.css('display')).to.equal('none');
   });
 
 });
