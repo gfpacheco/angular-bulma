@@ -51,7 +51,7 @@
     function link(scope, element) {
       element.on('click', toggleOpen);
 
-      var dropdown = element.find('.bu-dropdown');
+      var dropdown = angular.element(element[0].querySelector('.bu-dropdown'));
       var css = {
         display: 'none',
         position: 'absolute',
