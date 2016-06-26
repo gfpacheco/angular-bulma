@@ -10,10 +10,12 @@
       debug: true
     });
 
-  // Modules
+  // Directives
   angular.module('angularBulma.directives', [
     'angularBulma.directives.dropdown'
   ]);
+
+  // Module
   angular.module('angularBulma', [
     'angularBulma.config',
     'angularBulma.directives'
