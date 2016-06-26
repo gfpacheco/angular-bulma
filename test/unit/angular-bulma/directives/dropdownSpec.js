@@ -44,4 +44,12 @@ describe('angularBulma.directives.dropdown', function() {
     expect(dropdown.css('display')).to.equal('none');
   });
 
+  it('Shows the .bu-dropdown div when clicked', function() {
+    var element = $compile('<bu-dropdown></bu-dropdown>')($rootScope);
+    $rootScope.$digest();
+    var dropdown = element.find('.bu-dropdown');
+    element.trigger('click');
+    expect(dropdown.css('display')).to.equal('block');
+  });
+
 });

@@ -47,6 +47,8 @@
     ///
 
     function link(scope, element) {
+      element.on('click', toggleOpen);
+
       var dropdown = element.find('.bu-dropdown');
       var css = {
         display: 'none',
@@ -57,6 +59,10 @@
       };
 
       dropdown.css(css);
+
+      function toggleOpen() {
+        dropdown.css('display', 'block');
+      }
     }
   }
 
