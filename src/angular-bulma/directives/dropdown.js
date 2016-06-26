@@ -7,6 +7,7 @@
     var directive = {
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {
         label: '@',
         align: '@'
