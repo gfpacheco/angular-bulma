@@ -24,18 +24,13 @@
 
   function buDropdown($document) {
     var directive = {
-      restrict: 'E',
+      restrict: 'C',
       transclude: true,
-      replace: true,
       scope: {
-        label: '@',
         align: '@'
       },
       link: link,
-      template: '<div class="control">' +
-                  '<button class="button" type="button">{{label}}</button>' +
-                  '<div class="bu-dropdown" ng-transclude></div>' +
-                '<div>'
+      template: '<div class="bu-dropdown-body" ng-transclude></div>'
     };
 
     return directive;
@@ -45,7 +40,7 @@
     function link(scope, element) {
       element.on('click', toggle);
 
-      var dropdown = angular.element(element[0].querySelector('.bu-dropdown'));
+      var body = angular.element(element[0].querySelector('.bu-dropdown-body'));
       var css = {
         display: 'none',
         position: 'absolute',
@@ -59,10 +54,11 @@
         css.left = 0;
       }
 
-      dropdown.css(css);
+      body.css(css);
 
-      function toggle() {
-        if (dropdown.css('display') === 'none') {
+      function toggle(event) {
+        event.stopPropagation();
+        if (body.css('display') === 'none') {
           open();
         } else {
           close();
@@ -70,12 +66,12 @@
       }
 
       function open() {
-        dropdown.css('display', 'block');
+        body.css('display', 'block');
         $document.on('click', close);
       }
 
       function close() {
-        dropdown.css('display', 'none');
+        body.css('display', 'none');
         $document.off('click', close);
       }
 
