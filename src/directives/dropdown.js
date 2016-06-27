@@ -9,12 +9,10 @@
   function buDropdown($document) {
     var directive = {
       restrict: 'C',
-      transclude: true,
       scope: {
         align: '@'
       },
-      link: link,
-      template: '<div class="bu-dropdown-body" ng-transclude></div>'
+      link: link
     };
 
     return directive;

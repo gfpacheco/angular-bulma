@@ -15,17 +15,16 @@ describe('bulma.directives.dropdown', function() {
   }));
 
   function getCompiledElement() {
-    var element = $compile('<button class="bu-dropdown" align="{{align}}"><p></p></button>')($rootScope);
+    var element = $compile(
+      '<div class="bu-dropdown" align="{{align}}">' +
+        'Dropdown' +
+        '<div class="bu-dropdown-body">I\'m inside the dropdown</div>' +
+      '</div>'
+    )($rootScope);
     $document.append(element);
     $rootScope.$digest();
     return element;
   }
-
-  it('Wraps the content inside a .bu-dropdown-body div', function() {
-    var element = getCompiledElement();
-    var dropdownBody = element.find('.bu-dropdown-body');
-    expect(dropdownBody.find('p').length).to.equal(1);
-  });
 
   it('Hides the .bu-dropdown-body div by default', function() {
     var element = getCompiledElement();
