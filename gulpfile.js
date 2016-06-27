@@ -72,7 +72,7 @@ gulp.task('jshint', function() {
 gulp.task('test-src', function(done) {
   new KarmaServer({
     configFile: __dirname + '/karma-src.conf.js',
-    sleRun: true
+    singleRun: true
   }, done).start();
 });
 
@@ -90,8 +90,8 @@ gulp.task('test-dist-minified', function(done) {
   }, done).start();
 });
 
-gulp.task('test-all', function() {
-  runSequence('process-all', 'test-dist-concatenated', 'test-dist-minified');
+gulp.task('test-all', function(done) {
+  runSequence('process-all', 'test-dist-concatenated', 'test-dist-minified', done);
 });
 
 /*
