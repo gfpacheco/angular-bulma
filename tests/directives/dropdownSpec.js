@@ -16,12 +16,12 @@ describe('bulma.directives.dropdown', function() {
 
   function getCompiledElement() {
     var element = $compile(
-      '<div class="bu-dropdown" align="{{align}}">' +
+      '<div class="bu-dropdown">' +
         'Dropdown' +
         '<div class="bu-dropdown-body">I\'m inside the dropdown</div>' +
       '</div>'
     )($rootScope);
-    $document.append(element);
+    $document.find('body').append(element);
     $rootScope.$digest();
     return element;
   }
@@ -71,8 +71,14 @@ describe('bulma.directives.dropdown', function() {
   });
 
   it('Aligns the .bu-dropdown-body div to the right if told so', function() {
-    $rootScope.align = 'right';
-    var element = getCompiledElement();
+    var element = $compile(
+      '<div class="bu-dropdown">' +
+        'Dropdown' +
+        '<div class="bu-dropdown-body bu-is-right">I\'m inside the dropdown</div>' +
+      '</div>'
+    )($rootScope);
+    $document.find('body').append(element);
+    $rootScope.$digest();
     var dropdownBody = element.find('.bu-dropdown-body');
     expect(dropdownBody.css('right')).to.equal('0px');
   });

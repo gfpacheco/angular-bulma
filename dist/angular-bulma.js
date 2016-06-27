@@ -39,20 +39,6 @@
       element.on('click', toggle);
 
       var body = angular.element(element[0].querySelector('.bu-dropdown-body'));
-      var css = {
-        display: 'none',
-        position: 'absolute',
-        top: '100%',
-        zIndex: '1000'
-      };
-
-      if (scope.align === 'right') {
-        css.right = 0;
-      } else {
-        css.left = 0;
-      }
-
-      body.css(css);
 
       function toggle(event) {
         event.stopPropagation();

@@ -24,6 +24,7 @@ module.exports = function(config) {
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'dist/angular-bulma.min.css',
       'dist/angular-bulma.min.js',
       'tests/**/*.js'
     ],

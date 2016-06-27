@@ -20,7 +20,8 @@
   ],
   "license": "MIT",
   "main": [
-    "dist/angular-bulma.js"
+    "dist/angular-bulma.js",
+    "dist/angular-bulma.css"
   ],
   "ignore": [
     "src",

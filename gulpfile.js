@@ -3,6 +3,8 @@ process.env['BLUEBIRD_WARNINGS'] = 0;
 
 var gulp = require('gulp');
 var KarmaServer = require('karma').Server;
+var sass = require('gulp-sass');
+var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -23,7 +25,11 @@ var rootDirectory = path.resolve('./');
 var sourceDirectory = path.join(rootDirectory, './src');
 var testDirectory = path.join(rootDirectory, './tests');
 
-var sourceFiles = [
+var sassSourceFiles = [
+  path.join(sourceDirectory, '/**/*.sass')
+];
+
+var jsSourceFiles = [
   // Make sure module files are handled first
   path.join(sourceDirectory, '/**/module.js'),
   path.join(sourceDirectory, '/**/*.js')
@@ -32,7 +38,7 @@ var sourceFiles = [
 var lintFiles = [
   'gulpfile.js',
   'karma-*.conf.js'
-].concat(sourceFiles);
+].concat(jsSourceFiles);
 
 var versionFiles = [
   path.join(rootDirectory, 'package.json'),
@@ -43,8 +49,23 @@ var versionFiles = [
 ** Lint and build
 */
 
-gulp.task('build', function() {
-  gulp.src(sourceFiles)
+gulp.task('build-sass', function() {
+  return gulp.src(path.join(sourceDirectory, 'module.sass'))
+    .pipe(plumber())
+    .pipe(sass({
+      includePaths: [
+        './bower_components'
+      ]
+    }))
+    .pipe(rename('angular-bulma.css'))
+    .pipe(gulp.dest('./dist/'))
+    .pipe(cleanCSS())
+    .pipe(rename('angular-bulma.min.css'))
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('build-js', function() {
+  return gulp.src(jsSourceFiles)
     .pipe(plumber())
     .pipe(concat('angular-bulma.js'))
     .pipe(gulp.dest('./dist/'))
@@ -53,11 +74,7 @@ gulp.task('build', function() {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('process-all', function(done) {
-  runSequence('jshint', 'test-src', 'build', done);
-});
-
-gulp.task('jshint', function() {
+gulp.task('lint-js', function() {
   return gulp.src(lintFiles)
     .pipe(plumber())
     .pipe(jshint())
@@ -91,7 +108,15 @@ gulp.task('test-dist-minified', function(done) {
 });
 
 gulp.task('test-all', function(done) {
-  runSequence('process-all', 'test-dist-concatenated', 'test-dist-minified', done);
+  runSequence(
+    'build-sass',
+    'lint-js',
+    'test-src',
+    'build-js',
+    'test-dist-concatenated',
+    'test-dist-minified',
+    done
+  );
 });
 
 /*
@@ -99,7 +124,7 @@ gulp.task('test-all', function(done) {
 */
 
 function release(type) {
-  gulp.src(versionFiles)
+  return gulp.src(versionFiles)
     .pipe(bump({ type: type }))
     .pipe(gulp.dest(rootDirectory))
     .pipe(git.commit('Version bump'))
@@ -126,7 +151,8 @@ gulp.task('release-major', function() {
 */
 
 gulp.task('watch', function() {
-  gulp.watch(sourceFiles, ['process-all']);
+  gulp.watch(sassSourceFiles, function() { runSequence('build-sass', 'test-src'); });
+  gulp.watch(jsSourceFiles, function() { runSequence('lint-js', 'build-js', 'test-src'); });
   gulp.watch(path.join(testDirectory, '/**/*.js'), ['test-src']);
 });
 
