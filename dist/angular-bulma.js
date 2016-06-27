@@ -20,7 +20,9 @@
     .module('bulma.directives')
     .directive('buDropdown', buDropdown);
 
-  function buDropdown() {
+  buDropdown.$inject = ['$document'];
+
+  function buDropdown($document) {
     var directive = {
       restrict: 'E',
       transclude: true,
@@ -41,7 +43,7 @@
     ///
 
     function link(scope, element) {
-      element.on('click', toggleOpen);
+      element.on('click', toggle);
 
       var dropdown = angular.element(element[0].querySelector('.bu-dropdown'));
       var css = {
@@ -59,9 +61,27 @@
 
       dropdown.css(css);
 
-      function toggleOpen() {
-        dropdown.css('display', dropdown.css('display') === 'block' ? 'none' : 'block');
+      function toggle() {
+        if (dropdown.css('display') === 'none') {
+          open();
+        } else {
+          close();
+        }
       }
+
+      function open() {
+        dropdown.css('display', 'block');
+        $document.on('click', close);
+      }
+
+      function close() {
+        dropdown.css('display', 'none');
+        $document.off('click', close);
+      }
+
+      scope.$on('$destroy', function() {
+        $document.off('click', close);
+      });
     }
   }
 
