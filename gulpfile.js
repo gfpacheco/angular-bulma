@@ -134,6 +134,6 @@ gulp.task('watch', function() {
 ** Default
 */
 
-gulp.task('default', function() {
-  runSequence('process-all', 'watch');
+gulp.task('default', function(done) {
+  runSequence('test-all', done);
 });
