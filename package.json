@@ -17,9 +17,7 @@
     "bulma"
   ],
   "license": "MIT",
-  "main": [
-    "dist/angular-bulma.js"
-  ],
+  "main": "dist/angular-bulma.js",
   "dependencies": {
     "bulma": "^0.0.28"
   },
