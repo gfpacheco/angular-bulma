@@ -35,6 +35,35 @@ Add `bulma` module as a dependency of your Angular app:
 angular.module('yourModule', ['bulma']);
 ```
 
+## Components
+
+### Dropdown
+
+Add the `bu-dropdown` class to any tag and the `bu-dropdown-body` to any of its descendants. The
+body will be hidden by default and any click on the outer element will make the body visible. After
+that any click anywhere inside the document will make the dropdown body to hide again.
+
+```html
+<div class="bu-dropdown">
+  <div class="button">Dropdown</div>
+  <div class="bu-dropdown-body">
+    <nav class="menu">
+      <ul class="menu-list">
+        <li><a>Menu item</a></li>
+        <li><a>Menu item</a></li>
+        <li><a>Menu item</a></li>
+        <li><a>Menu item</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+```
+
+#### Options
+
+`bu-is-right` - Adding this class to the `bu-dropdown-body` element will make it align to the right
+side of the `bu-dropdown`.
+
 ## Contributing
 
 Again, this is an early stage project, any help is appreciated, feel free to open issues and submit
