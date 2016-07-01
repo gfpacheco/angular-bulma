@@ -1,4 +1,4 @@
-# angular-bulma
+# angular-bulma [![Build Status](https://travis-ci.org/gfpacheco/angular-bulma.svg?branch=master)](https://travis-ci.org/gfpacheco/angular-bulma)
 
 This is a (WIP) project to bring some interaction to the components of Bulma into the Angular world.
 
