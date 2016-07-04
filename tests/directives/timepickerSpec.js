@@ -7,25 +7,33 @@ describe('bulma.directives.timepicker', function() {
   var $compile;
   var $rootScope;
   var $document;
+  var element;
+  var inputs;
 
   beforeEach(inject(function(_$compile_, _$rootScope_, _$document_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     $document = _$document_;
-  }));
 
-  function getCompiledElement() {
-    var element = $compile(
-      '<bu-timepicker></bu-timepicker>'
+    $rootScope.time = newTime(12);
+    element = $compile(
+      '<bu-timepicker ng-model="time"></bu-timepicker>'
     )($rootScope);
+    inputs = element.find('input');
     $document.find('body').append(element);
     $rootScope.$digest();
-    return element;
+  }));
+
+  function newTime(hours) {
+    var time = new Date();
+    time.setHours(hours);
+    time.setMinutes(0);
+    time.setSeconds(0);
+    time.setMilliseconds(0);
+    return time;
   }
 
   it('Has two input fields', function() {
-    var element = getCompiledElement();
-    var inputs = element.find('input');
     expect(inputs.size()).to.equal(2);
   });
 
