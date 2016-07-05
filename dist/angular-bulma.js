@@ -109,8 +109,10 @@
 
       ///
 
-      function formatInput(number) {
-        return ('0' + number).substr(-2);
+      function formatInput(value) {
+        value = ('' + value).replace(/[^0-9]/, '');
+        value = '00' + value;
+        return value.substr(-2);
       }
 
       function modelToView(modelValue) {

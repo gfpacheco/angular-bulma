@@ -93,4 +93,11 @@ describe('bulma.directives.timepicker', function() {
     expect(getViewState()).to.deep.equal(['01', '02']);
   });
 
+  it('Ignores inputs other than numbers', function() {
+    inputs.eq(0).val('a').triggerHandler('input');
+    inputs.eq(1).val('-1').triggerHandler('input');
+    expect(getModelState()).to.deep.equal([0, 1]);
+    expect(getViewState()).to.deep.equal(['00', '01']);
+  });
+
 });
