@@ -14,3 +14,10 @@
   .bu-dropdown-body.bu-is-right {
     left: auto;
     right: 0; }
+
+.bu-timepicker input {
+  width: 50px; }
+
+.bu-timepicker span {
+  margin: 0 5px;
+  line-height: 30px; }

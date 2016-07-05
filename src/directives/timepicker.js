@@ -10,9 +10,10 @@
     var directive = {
       restrict: 'E',
       require: '?ngModel',
-      template: '<div>' +
-                  '<input ng-model="hours" ng-change="onInputChange()">' +
-                  '<input ng-model="minutes" ng-change="onInputChange()">' +
+      template: '<div class="bu-timepicker control is-grouped">' +
+                  '<input class="input" ng-model="hours" ng-change="onInputChange()">' +
+                  '<span>:</span>' +
+                  '<input class="input" ng-model="minutes" ng-change="onInputChange()">' +
                 '</div>',
       link: link
     };
