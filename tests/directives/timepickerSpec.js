@@ -1,5 +1,8 @@
 'use strict';
 
+var MILISECONDS_IN_ONE_MINUTE = 1000 * 60;
+var MILISECONDS_IN_ONE_HOUR = MILISECONDS_IN_ONE_MINUTE * 60;
+
 describe('bulma.directives.timepicker', function() {
 
   beforeEach(module('bulma.directives'));
@@ -25,19 +28,14 @@ describe('bulma.directives.timepicker', function() {
   }));
 
   function newTime(hours, minutes) {
-    var time = new Date();
-    time.setHours(hours);
-    time.setMinutes(minutes);
-    time.setSeconds(0);
-    time.setMilliseconds(0);
-    return time;
+    return (hours * MILISECONDS_IN_ONE_HOUR) + (minutes * MILISECONDS_IN_ONE_MINUTE);
   }
 
   function getModelState(time) {
     time = time || $rootScope.time;
     return [
-      time.getHours(),
-      time.getMinutes()
+      Math.floor(time / MILISECONDS_IN_ONE_HOUR),
+      Math.floor((time % MILISECONDS_IN_ONE_HOUR) / MILISECONDS_IN_ONE_MINUTE)
     ];
   }
 

@@ -69,6 +69,9 @@
 
 (function (angular) {
 
+  var MILISECONDS_IN_ONE_MINUTE = 1000 * 60;
+  var MILISECONDS_IN_ONE_HOUR = MILISECONDS_IN_ONE_MINUTE * 60;
+
   angular
     .module('bulma.directives')
     .directive('buTimepicker', buTimepicker);
@@ -120,18 +123,13 @@
 
       function modelToView(modelValue) {
         return {
-          hours: formatInput(modelValue.getHours(), 23),
-          minutes: formatInput(modelValue.getMinutes(), 59)
+          hours: formatInput(Math.floor(modelValue / MILISECONDS_IN_ONE_HOUR), 23),
+          minutes: formatInput(Math.floor((modelValue % MILISECONDS_IN_ONE_HOUR) / MILISECONDS_IN_ONE_MINUTE), 59)
         };
       }
 
       function viewToModel(viewValue) {
-        var time = new Date();
-        time.setHours(parseInt(viewValue.hours, 10));
-        time.setMinutes(parseInt(viewValue.minutes, 10));
-        time.setSeconds(0);
-        time.setMilliseconds(0);
-        return time;
+        return (viewValue.hours * MILISECONDS_IN_ONE_HOUR) + (viewValue.minutes * MILISECONDS_IN_ONE_MINUTE);
       }
 
       function render() {
