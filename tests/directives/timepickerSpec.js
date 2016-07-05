@@ -33,17 +33,19 @@ describe('bulma.directives.timepicker', function() {
     return time;
   }
 
-  function getModelState() {
+  function getModelState(time) {
+    time = time || $rootScope.time;
     return [
-      $rootScope.time.getHours(),
-      $rootScope.time.getMinutes()
+      time.getHours(),
+      time.getMinutes()
     ];
   }
 
-  function getViewState(element) {
+  function getViewState(ins) {
+    ins = ins || inputs;
     return [
-      inputs.eq(0).val(),
-      inputs.eq(1).val()
+      ins.eq(0).val(),
+      ins.eq(1).val()
     ];
   }
 
@@ -64,9 +66,24 @@ describe('bulma.directives.timepicker', function() {
   it('Changes the scope value when the input changes', function() {
     inputs.eq(0).val('21').triggerHandler('input');
     inputs.eq(1).val('43').triggerHandler('input');
-    $rootScope.$digest();
     expect(getModelState()).to.deep.equal([21, 43]);
     expect(getViewState()).to.deep.equal(['21', '43']);
+  });
+
+  it('Does not share scope', function() {
+      $rootScope.time2 = newTime(12, 34);
+      var element2 = $compile(
+        '<bu-timepicker ng-model="time2"></bu-timepicker>'
+      )($rootScope);
+      var inputs2 = element2.find('input');
+      $document.find('body').append(element2);
+      $rootScope.$digest();
+      inputs2.eq(0).val('21').triggerHandler('input');
+      inputs2.eq(1).val('43').triggerHandler('input');
+      expect(getModelState($rootScope.time2)).to.deep.equal([21, 43]);
+      expect(getViewState(inputs2)).to.deep.equal(['21', '43']);
+      expect(getModelState()).to.deep.equal([12, 34]);
+      expect(getViewState()).to.deep.equal(['12', '34']);
   });
 
 });

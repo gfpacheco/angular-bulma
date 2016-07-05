@@ -79,6 +79,7 @@
     var directive = {
       restrict: 'E',
       require: '?ngModel',
+      scope: {},
       template: '<div class="bu-timepicker control is-grouped">' +
                   '<input class="input" ng-model="hours" ng-change="onInputChange()">' +
                   '<span>:</span>' +
