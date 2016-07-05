@@ -79,7 +79,10 @@
     var directive = {
       restrict: 'E',
       require: '?ngModel',
-      template: '<input ng-model="hours"><input ng-model="minutes">',
+      template: '<div>' +
+                  '<input ng-model="hours" ng-change="onInputChange()">' +
+                  '<input ng-model="minutes" ng-change="onInputChange()">' +
+                '</div>',
       link: link
     };
 
@@ -97,7 +100,10 @@
       var hoursInput = inputs.eq(0);
 
       ngModel.$formatters.push(modelToView);
+      ngModel.$parsers.push(viewToModel);
       ngModel.$render = render;
+
+      scope.onInputChange = onInputChange;
 
       ///
 
@@ -108,9 +114,25 @@
         };
       }
 
+      function viewToModel(viewValue) {
+        var time = new Date();
+        time.setHours(viewValue.hours);
+        time.setMinutes(viewValue.minutes);
+        time.setSeconds(0);
+        time.setMilliseconds(0);
+        return time;
+      }
+
       function render() {
         scope.hours = ngModel.$viewValue.hours;
         scope.minutes = ngModel.$viewValue.minutes;
+      }
+
+      function onInputChange() {
+        ngModel.$setViewValue({
+          hours: scope.hours,
+          minutes: scope.minutes
+        });
       }
     }
   }

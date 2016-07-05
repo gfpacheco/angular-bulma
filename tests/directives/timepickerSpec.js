@@ -61,4 +61,12 @@ describe('bulma.directives.timepicker', function() {
     expect(getViewState()[1]).to.equal('34');
   });
 
+  it('Changes the scope value when the input changes', function() {
+    inputs.eq(0).val('21').triggerHandler('input');
+    inputs.eq(1).val('43').triggerHandler('input');
+    $rootScope.$digest();
+    expect(getModelState()).to.deep.equal([21, 43]);
+    expect(getViewState()).to.deep.equal(['21', '43']);
+  });
+
 });
