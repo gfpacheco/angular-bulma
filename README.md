@@ -64,6 +64,15 @@ that any click anywhere inside the document will make the dropdown body to hide 
 `bu-is-right` - Adding this class to the `bu-dropdown-body` element will make it align to the right
 side of the `bu-dropdown`.
 
+### Timepicker
+
+As mentioned before, this project will evolve with the need for features. This is a clear example of
+a feature implemented as the minimum needed.
+
+```html
+<bu-timepicker ng-model="myTime"/>
+```
+
 ## Contributing
 
 Again, this is an early stage project, any help is appreciated, feel free to open issues and submit
