@@ -100,4 +100,16 @@ describe('bulma.directives.timepicker', function() {
     expect(getViewState()).to.deep.equal(['00', '01']);
   });
 
+  it('Trim hours greater than 23', function() {
+    inputs.eq(0).val('25').triggerHandler('input');
+    expect(getModelState()).to.deep.equal([23, 34]);
+    expect(getViewState()).to.deep.equal(['23', '34']);
+  });
+
+  it('Trim minutes greater than 59', function() {
+    inputs.eq(1).val('60').triggerHandler('input');
+    expect(getModelState()).to.deep.equal([12, 59]);
+    expect(getViewState()).to.deep.equal(['12', '59']);
+  });
+
 });

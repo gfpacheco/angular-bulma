@@ -40,16 +40,19 @@
 
       ///
 
-      function formatInput(value) {
+      function formatInput(value, max) {
         value = ('' + value).replace(/[^0-9]/, '');
+        if (parseInt(value || 0, 10) > max) {
+          value = max;
+        }
         value = '00' + value;
         return value.substr(-2);
       }
 
       function modelToView(modelValue) {
         return {
-          hours: formatInput(modelValue.getHours()),
-          minutes: formatInput(modelValue.getMinutes())
+          hours: formatInput(modelValue.getHours(), 23),
+          minutes: formatInput(modelValue.getMinutes(), 59)
         };
       }
 
@@ -69,8 +72,8 @@
 
       function onInputChange() {
         ngModel.$setViewValue({
-          hours: formatInput(scope.hours),
-          minutes: formatInput(scope.minutes)
+          hours: formatInput(scope.hours, 23),
+          minutes: formatInput(scope.minutes, 59)
         });
         ngModel.$render();
       }
