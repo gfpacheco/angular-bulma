@@ -86,4 +86,11 @@ describe('bulma.directives.timepicker', function() {
       expect(getViewState()).to.deep.equal(['12', '34']);
   });
 
+  it('Adds a leading zero if the input value is lower than 10', function() {
+    inputs.eq(0).val('1').triggerHandler('input');
+    inputs.eq(1).val('2').triggerHandler('input');
+    expect(getModelState()).to.deep.equal([1, 2]);
+    expect(getViewState()).to.deep.equal(['01', '02']);
+  });
+
 });

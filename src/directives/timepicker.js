@@ -40,17 +40,21 @@
 
       ///
 
+      function formatInput(number) {
+        return ('0' + number).substr(-2);
+      }
+
       function modelToView(modelValue) {
         return {
-          hours: modelValue.getHours(),
-          minutes: modelValue.getMinutes()
+          hours: formatInput(modelValue.getHours()),
+          minutes: formatInput(modelValue.getMinutes())
         };
       }
 
       function viewToModel(viewValue) {
         var time = new Date();
-        time.setHours(viewValue.hours);
-        time.setMinutes(viewValue.minutes);
+        time.setHours(parseInt(viewValue.hours, 10));
+        time.setMinutes(parseInt(viewValue.minutes, 10));
         time.setSeconds(0);
         time.setMilliseconds(0);
         return time;
@@ -63,9 +67,10 @@
 
       function onInputChange() {
         ngModel.$setViewValue({
-          hours: scope.hours,
-          minutes: scope.minutes
+          hours: formatInput(scope.hours),
+          minutes: formatInput(scope.minutes)
         });
+        ngModel.$render();
       }
     }
   }
