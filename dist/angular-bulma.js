@@ -20,9 +20,9 @@
     .module('bulma.directives')
     .directive('buDropdown', buDropdown);
 
-  buDropdown.$inject = ['$document'];
+  buDropdown.$inject = ['$window', '$document'];
 
-  function buDropdown($document) {
+  function buDropdown($window, $document) {
     var directive = {
       restrict: 'C',
       scope: {
@@ -42,7 +42,7 @@
 
       function toggle(event) {
         event.stopPropagation();
-        if (body.css('display') === 'none') {
+        if ($window.getComputedStyle(body[0], null).display === 'none') {
           open();
         } else {
           close();
