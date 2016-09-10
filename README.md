@@ -37,6 +37,30 @@ angular.module('yourModule', ['bulma']);
 
 ## Components
 
+### Daterangepicker
+
+This component wraps the [bulma-daterangepicker](https://github.com/gfpacheco/bulma-daterangepicker)
+package into an Angular directive and is heavily inspired ~~(pretty much copy-pasted)~~ by
+[angular-daterangepicker](https://github.com/fragaria/angular-daterangepicker).
+
+```html
+<bu-daterangepicker ng-model="myDaterange"/>
+```
+
+> Important! The model must be an Object and have `startDate` and `endDate` properties.
+
+Min and max value can be set via additional attributes:
+
+```html
+<bu-daterangepicker ng-model="date" min="'2000-01-01'" max="'2000-01-02'"/>
+```
+
+It can be further customized by passing in the `options` attribute.
+
+```html
+<bu-daterangepicker ng-model="date" min="'2000-01-01'" max="'2000-01-02'" options="{separator: ':'}"/>
+```
+
 ### Dropdown
 
 Add the `bu-dropdown` class to any tag and the `bu-dropdown-body` to any of its descendants. The

@@ -34,7 +34,10 @@
     "tests"
   ],
   "dependencies": {
-    "bulma": "^0.0.28"
+    "moment": "^2.14.1",
+    "jquery": "^1.9.0",
+    "bulma": "^0.1.2",
+    "bulma-daterangepicker": "^2.2.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.0",
