@@ -76,4 +76,25 @@ describe('bulma.services.dialog', function() {
 
   });
 
+  describe('#confirm', function() {
+
+    it('Calls the show method with some predefined configs', function() {
+      sinon.spy(buDialog, 'show');
+      var message = 'Message sent';
+      buDialog.confirm(message);
+      expect(buDialog.show.args[0][0]).to.equal(message);
+      expect(buDialog.show.args[0][1]).to.deep.equal([
+        {
+          label: 'No',
+          class: 'is-link',
+        }, {
+          label: 'Yes',
+          class: 'is-primary',
+        }
+      ]);
+      buDialog.show.restore();
+    });
+
+  });
+
 });

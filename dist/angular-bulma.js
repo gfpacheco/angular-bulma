@@ -432,6 +432,7 @@
 
       var dialog = {
         show: show,
+        confirm: confirm,
       };
 
       return dialog;
@@ -481,6 +482,18 @@
           }
         });
         return promise;
+      }
+
+      function confirm(message) {
+        return dialog.show(message, [
+          {
+            label: 'No',
+            class: 'is-link',
+          }, {
+            label: 'Yes',
+            class: 'is-primary',
+          }
+        ]);
       }
     }
 
