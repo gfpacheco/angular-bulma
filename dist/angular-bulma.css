@@ -21,3 +21,12 @@
 .bu-timepicker span {
   margin: 0 5px;
   line-height: 30px; }
+
+.bu-dialog {
+  text-align: center; }
+  .bu-dialog .modal-content {
+    display: inline-block;
+    width: auto;
+    text-align: left; }
+  .bu-dialog .button {
+    min-width: 100px; }

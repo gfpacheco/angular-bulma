@@ -1,32 +1,32 @@
 'use strict';
 
-describe('bulma.services.alert', function() {
+describe('bulma.services.dialog', function() {
 
   beforeEach(module('bulma.services'));
 
   var $rootScope;
   var $document;
-  var buAlert;
+  var buDialog;
 
-  beforeEach(inject(function(_$rootScope_, _$document_, _buAlert_) {
+  beforeEach(inject(function(_$rootScope_, _$document_, _buDialog_) {
     $rootScope = _$rootScope_;
     $document = _$document_;
-    buAlert = _buAlert_;
+    buDialog = _buDialog_;
     $document.find('body').empty();
   }));
 
   describe('#show', function() {
 
     function callAndReturnModal(method, args) {
-      buAlert[method].apply(buAlert, args);
+      buDialog[method].apply(buDialog, args);
       $rootScope.$digest();
       return $document.find('.modal');
     }
 
-    it('Renders one active modal with the alert class', function() {
+    it('Renders one active modal with the bu-dialog class', function() {
       var modal = callAndReturnModal('show');
       expect(modal.hasClass('is-active'));
-      expect(modal.hasClass('alert'));
+      expect(modal.hasClass('bu-dialog'));
     });
 
     it('Renders the sent message inside a subtitle paragraph', function() {
@@ -59,7 +59,7 @@ describe('bulma.services.alert', function() {
 
     it('Returns a Promise that is resolved with the label of the clicked button', function() {
       var callback = sinon.spy();
-      buAlert.show('Message sent').then(callback);
+      buDialog.show('Message sent').then(callback);
       $rootScope.$digest();
       $document.find('.modal .button').eq(0).click();
       $rootScope.$digest();

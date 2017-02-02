@@ -414,27 +414,27 @@
 
   angular
     .module('bulma.services')
-    .provider('buAlert', buAlertProvider);
+    .provider('buDialog', buDialogProvider);
 
-  function buAlertProvider() {
+  function buDialogProvider() {
     var containerSelector = 'body';
 
     this.containerSelector = function(newSelector) {
       containerSelector = newSelector;
     };
 
-    this.$get = ['$document', '$q', buAlert];
+    this.$get = ['$document', '$q', buDialog];
 
     ///
 
-    function buAlert($document, $q) {
+    function buDialog($document, $q) {
       var container = $document.find(containerSelector);
 
-      var alert = {
+      var dialog = {
         show: show,
       };
 
-      return alert;
+      return dialog;
 
       ///
 
@@ -455,13 +455,15 @@
         });
 
         var modal = angular.element(
-          '<div class="modal is-active alert">' +
+          '<div class="modal is-active bu-dialog">' +
             '<div class="modal-background"></div>' +
             '<div class="modal-content">' +
-              '<p class="subtitle">' + message + '</p>' +
-              '<div class="control is-grouped">' +
-                '<div class="control is-expanded"></div>' +
-                buttonsHtml +
+              '<div class="box">' +
+                '<p class="subtitle">' + message + '</p>' +
+                '<div class="control is-grouped">' +
+                  '<div class="control is-expanded"></div>' +
+                  buttonsHtml +
+                '</div>' +
               '</div>' +
             '</div>' +
           '</div>'
