@@ -20,4 +20,8 @@ describe('bulma', function() {
     expect(hasModule('bulma.directives')).to.be.ok;
   });
 
+  it('should load services module', function() {
+    expect(hasModule('bulma.services')).to.be.ok;
+  });
+
 });

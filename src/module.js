@@ -2,7 +2,8 @@
 
   angular
     .module('bulma', [
-      'bulma.directives'
+      'bulma.directives',
+      'bulma.services',
     ]);
 
 })(angular);
