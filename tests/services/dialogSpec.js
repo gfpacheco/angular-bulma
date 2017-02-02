@@ -66,6 +66,14 @@ describe('bulma.services.dialog', function() {
       expect(callback).to.have.been.calledWith('Ok');
     });
 
+    it('Removes the modal when any button is clicked', function() {
+      buDialog.show('Message sent');
+      $rootScope.$digest();
+      $document.find('.modal .button').eq(0).click();
+      $rootScope.$digest();
+      expect($document.find('.modal').length).to.equal(0);
+    });
+
   });
 
 });

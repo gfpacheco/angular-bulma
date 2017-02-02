@@ -63,6 +63,7 @@
         var promise = deferred.promise;
         modal.on('click', function(e) {
           if (e.target.tagName.toLowerCase() === 'button') {
+            modal.remove();
             deferred.resolve(angular.element(e.target).text());
             modal.off('click');
           }
