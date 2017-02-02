@@ -95,6 +95,23 @@ describe('bulma.services.dialog', function() {
       buDialog.show.restore();
     });
 
+    it('Calls the show method with some predefined configs and the given labels', function() {
+      sinon.spy(buDialog, 'show');
+      var message = 'Message sent';
+      buDialog.confirm(message, 'Não', 'Sim');
+      expect(buDialog.show.args[0][0]).to.equal(message);
+      expect(buDialog.show.args[0][1]).to.deep.equal([
+        {
+          label: 'Não',
+          class: 'is-link',
+        }, {
+          label: 'Sim',
+          class: 'is-primary',
+        }
+      ]);
+      buDialog.show.restore();
+    });
+
   });
 
 });

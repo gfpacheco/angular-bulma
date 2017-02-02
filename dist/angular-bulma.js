@@ -484,13 +484,13 @@
         return promise;
       }
 
-      function confirm(message) {
+      function confirm(message, noLabel, yesLabel) {
         return dialog.show(message, [
           {
-            label: 'No',
+            label: noLabel || 'No',
             class: 'is-link',
           }, {
-            label: 'Yes',
+            label: yesLabel || 'Yes',
             class: 'is-primary',
           }
         ]);
