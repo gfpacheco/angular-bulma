@@ -18,7 +18,7 @@ describe('bulma.services.alert', function() {
   describe('#show', function() {
 
     function callAndReturnModal(method, args) {
-      buAlert[method].call(buAlert, args);
+      buAlert[method].apply(buAlert, args);
       $rootScope.$digest();
       return $document.find('.modal');
     }
@@ -42,6 +42,19 @@ describe('bulma.services.alert', function() {
       expect(buttonsEl.length).to.equal(1);
       expect(buttonsEl.text()).to.equal('Ok');
       expect(buttonsEl.hasClass('is-primary'));
+    });
+
+    it('Renders the button with the label and class sent', function() {
+      var message = 'Message sent';
+      var buttons = [{
+        label: 'Yes',
+        class: 'is-info',
+      }];
+      var modal = callAndReturnModal('show', [message, buttons]);
+      var buttonsEl = modal.find('.button');
+      expect(buttonsEl.length).to.equal(1);
+      expect(buttonsEl.text()).to.equal(buttons[0].label);
+      expect(buttonsEl.hasClass(buttons[0].class));
     });
 
   });

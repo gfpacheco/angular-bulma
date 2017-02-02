@@ -438,7 +438,22 @@
 
       ///
 
-      function show(message) {
+      function show(message, buttons) {
+        if (!buttons) {
+          buttons = [{
+            label: 'Ok',
+            class: 'is-primary',
+          }];
+        }
+
+        var buttonsHtml = '';
+        buttons.forEach(function(button) {
+          buttonsHtml +=
+            '<div class="control">' +
+              '<button type="button" class="button ' + button.class + '">' + button.label + '</button>' +
+            '</div>';
+        });
+
         var modal = angular.element(
           '<div class="modal is-active alert">' +
             '<div class="modal-background"></div>' +
@@ -446,9 +461,7 @@
               '<p class="subtitle">' + message + '</p>' +
               '<div class="control is-grouped">' +
                 '<div class="control is-expanded"></div>' +
-                '<div class="control">' +
-                  '<button type="button" class="button is-primary">Ok</button>' +
-                '</div>' +
+                buttonsHtml +
               '</div>' +
             '</div>' +
           '</div>'
