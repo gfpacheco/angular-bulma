@@ -12,14 +12,27 @@ describe('bulma.services.alert', function() {
     $rootScope = _$rootScope_;
     $document = _$document_;
     buAlert = _buAlert_;
+    $document.find('body').empty();
   }));
 
   describe('#show', function() {
 
-    it('Renders one active modal with the alert class', function() {
-      buAlert.show();
+    function callAndReturnModal(method, args) {
+      buAlert[method].call(buAlert, args);
       $rootScope.$digest();
-      expect($document.find('.modal.is-active.alert').length).to.equal(1);
+      return $document.find('.modal');
+    }
+
+    it('Renders one active modal with the alert class', function() {
+      var modal = callAndReturnModal('show');
+      expect(modal.hasClass('is-active'));
+      expect(modal.hasClass('alert'));
+    });
+
+    it('Renders the sent message inside a subtitle paragraph', function() {
+      var message = 'Message sent';
+      var modal = callAndReturnModal('show', [message]);
+      expect(modal.find('.subtitle').text()).to.equal(message);
     });
 
   });

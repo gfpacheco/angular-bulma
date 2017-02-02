@@ -438,11 +438,13 @@
 
       ///
 
-      function show() {
+      function show(message) {
         var modal = angular.element(
           '<div class="modal is-active alert">' +
             '<div class="modal-background"></div>' +
-            '<div class="modal-content"></div>' +
+            '<div class="modal-content">' +
+              '<p class="subtitle">' + message + '</p>' +
+            '</div>' +
           '</div>'
         );
 
