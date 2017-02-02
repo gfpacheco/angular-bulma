@@ -11,11 +11,11 @@
       containerSelector = newSelector;
     };
 
-    this.$get = ['$document', buAlert];
+    this.$get = ['$document', '$q', buAlert];
 
     ///
 
-    function buAlert($document) {
+    function buAlert($document, $q) {
       var container = $document.find(containerSelector);
 
       var alert = {
@@ -56,6 +56,16 @@
         );
 
         container.append(modal);
+
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        modal.on('click', function(e) {
+          if (e.target.tagName.toLowerCase() === 'button') {
+            deferred.resolve(angular.element(e.target).text());
+            modal.off('click');
+          }
+        });
+        return promise;
       }
     }
 

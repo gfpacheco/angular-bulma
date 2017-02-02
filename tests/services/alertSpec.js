@@ -57,6 +57,15 @@ describe('bulma.services.alert', function() {
       expect(buttonsEl.hasClass(buttons[0].class));
     });
 
+    it('Returns a Promise that is resolved with the label of the clicked button', function() {
+      var callback = sinon.spy();
+      buAlert.show('Message sent').then(callback);
+      $rootScope.$digest();
+      $document.find('.modal .button').eq(0).click();
+      $rootScope.$digest();
+      expect(callback).to.have.been.calledWith('Ok');
+    });
+
   });
 
 });
