@@ -444,6 +444,12 @@
             '<div class="modal-background"></div>' +
             '<div class="modal-content">' +
               '<p class="subtitle">' + message + '</p>' +
+              '<div class="control is-grouped">' +
+                '<div class="control is-expanded"></div>' +
+                '<div class="control">' +
+                  '<button type="button" class="button is-primary">Ok</button>' +
+                '</div>' +
+              '</div>' +
             '</div>' +
           '</div>'
         );

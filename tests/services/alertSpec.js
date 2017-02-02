@@ -35,6 +35,15 @@ describe('bulma.services.alert', function() {
       expect(modal.find('.subtitle').text()).to.equal(message);
     });
 
+    it('Renders the default ok button if none sent', function() {
+      var message = 'Message sent';
+      var modal = callAndReturnModal('show', [message]);
+      var buttonsEl = modal.find('.button');
+      expect(buttonsEl.length).to.equal(1);
+      expect(buttonsEl.text()).to.equal('Ok');
+      expect(buttonsEl.hasClass('is-primary'));
+    });
+
   });
 
 });
