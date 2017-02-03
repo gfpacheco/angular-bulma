@@ -12,6 +12,7 @@
     };
 
     var defaultOptions = {
+      message: '',
       buttons: [
         {
           label: 'Ok',
@@ -76,7 +77,7 @@
         return promise;
       }
 
-      function confirm(message, noLabel, yesLabel) {
+      function confirm(message, noLabel, yesLabel, isDanger) {
         return dialog.show({
           message: message,
           buttons: [
@@ -86,7 +87,7 @@
             },
             {
               label: yesLabel || 'Yes',
-              class: 'is-primary',
+              class: isDanger ? 'is-danger' : 'is-primary',
             },
           ],
         });

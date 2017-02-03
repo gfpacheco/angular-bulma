@@ -132,6 +132,26 @@ describe('bulma.services.dialog', function() {
       buDialog.show.restore();
     });
 
+    it('Renders the second button with the is-danger class if isDanger argument is true', function() {
+      sinon.spy(buDialog, 'show');
+      var message = 'Message sent';
+      buDialog.confirm(message, 'Não', 'Sim', true);
+      expect(buDialog.show.args[0][0]).to.deep.equal({
+        message: message,
+        buttons: [
+          {
+            label: 'Não',
+            class: 'is-link',
+          },
+          {
+            label: 'Sim',
+            class: 'is-danger',
+          }
+        ]
+      });
+      buDialog.show.restore();
+    });
+
   });
 
 });
