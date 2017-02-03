@@ -424,6 +424,7 @@
     };
 
     var defaultOptions = {
+      title: '',
       message: '',
       buttons: [
         {
@@ -465,7 +466,8 @@
             '<div class="modal-background"></div>' +
             '<div class="modal-content">' +
               '<div class="box">' +
-                (options.message ? '<p class="subtitle bu-dialog-message">' + options.message + '</p>' : '') +
+                (options.title ? '<p class="subtitle bu-dialog-title">' + options.title + '</p>' : '') +
+                (options.message ? '<p class="block bu-dialog-message">' + options.message + '</p>' : '') +
                 '<div class="control is-grouped">' +
                   '<div class="control is-expanded"></div>' +
                   buttonsHtml +

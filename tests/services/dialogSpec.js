@@ -29,6 +29,22 @@ describe('bulma.services.dialog', function() {
       expect(modal.hasClass('bu-dialog'));
     });
 
+    it('Renders the sent title inside the bu-dialog-title paragraph', function() {
+      var options = {
+        title: 'Title sent',
+      };
+      buDialog.show(options);
+      var modal = digestAndGetModal();
+      expect(modal.find('.bu-dialog-title').text()).to.equal(options.title);
+    });
+
+    it('Does not render any title if not sent', function() {
+      var options = {};
+      buDialog.show(options);
+      var modal = digestAndGetModal();
+      expect(modal.find('.bu-dialog-title').length).to.equal(0);
+    });
+
     it('Renders the sent message inside the bu-dialog-message paragraph', function() {
       var options = {
         message: 'Message sent',
