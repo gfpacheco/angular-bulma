@@ -182,7 +182,7 @@ describe('bulma.services.dialog', function() {
       sinon.spy(buDialog, 'show');
       var title = 'Title sent';
       var message = 'Message sent';
-      buDialog.confirm(title, message, 'Não', 'Sim');
+      buDialog.confirm(title, message, 'Sim', 'Não');
       expect(buDialog.show.args[0][0]).to.deep.equal({
         title: title,
         message: message,
@@ -204,7 +204,7 @@ describe('bulma.services.dialog', function() {
       sinon.spy(buDialog, 'show');
       var title = 'Title sent';
       var message = 'Message sent';
-      buDialog.confirm(title, message, 'Não', 'Sim', true);
+      buDialog.confirm(title, message, 'Sim', 'Não', true);
       expect(buDialog.show.args[0][0]).to.deep.equal({
         title: title,
         message: message,

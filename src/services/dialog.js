@@ -79,7 +79,7 @@
         return promise;
       }
 
-      function confirm(title, message, noLabel, yesLabel, isDanger) {
+      function confirm(title, message, yesLabel, noLabel, isDanger) {
         return dialog.show({
           title: title,
           message: message,

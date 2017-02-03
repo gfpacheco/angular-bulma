@@ -83,7 +83,7 @@ If you just want a confirmation dialog with title, message, one primary and one 
 you can use the `buDialog.confirm`:
 
 ```js
-buDialog.confirm('Dialog title', 'Dialog message', 'Secondary button', 'Primary button');
+buDialog.confirm('Dialog title', 'Dialog message', 'Primary button', 'Secondary button');
 ```
 
 One aditional boolean parameter can be send, if `true` it will add the `is-danger` class to the
