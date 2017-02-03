@@ -61,6 +61,34 @@ It can be further customized by passing in the `options` attribute.
 <bu-daterangepicker ng-model="date" min="'2000-01-01'" max="'2000-01-02'" options="{separator: ':'}"/>
 ```
 
+### Dialog
+
+A modified version of Bulma's modal. To show a title, a message, some buttons and return which
+button was clicked. Inject the `buDialog` wherever you want to use it then:
+
+```js
+buDialog.show({
+  title: 'Dialog title',
+  message: 'Dialog message',
+  buttons: [
+    {
+      label: 'Ok',
+      class: 'is-primary',
+    }
+  ]
+});
+```
+
+If you just want a confirmation dialog with title, message, one primary and one secondary button
+you can use the `buDialog.confirm`:
+
+```js
+buDialog.confirm('Dialog title', 'Dialog message', 'Secondary button', 'Primary button');
+```
+
+One aditional boolean parameter can be send, if `true` it will add the `is-danger` class to the
+primary button.
+
 ### Dropdown
 
 Add the `bu-dropdown` class to any tag and the `bu-dropdown-body` to any of its descendants. The
