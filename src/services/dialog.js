@@ -11,6 +11,15 @@
       containerSelector = newSelector;
     };
 
+    var defaultOptions = {
+      buttons: [
+        {
+          label: 'Ok',
+          class: 'is-primary',
+        },
+      ],
+    };
+
     this.$get = ['$document', '$q', buDialog];
 
     ///
@@ -27,16 +36,11 @@
 
       ///
 
-      function show(message, buttons) {
-        if (!buttons) {
-          buttons = [{
-            label: 'Ok',
-            class: 'is-primary',
-          }];
-        }
+      function show(options) {
+        options = angular.extend({}, defaultOptions, options);
 
         var buttonsHtml = '';
-        buttons.forEach(function(button) {
+        options.buttons.forEach(function(button) {
           buttonsHtml +=
             '<div class="control">' +
               '<button type="button" class="button ' + button.class + '">' + button.label + '</button>' +
@@ -48,7 +52,7 @@
             '<div class="modal-background"></div>' +
             '<div class="modal-content">' +
               '<div class="box">' +
-                '<p class="subtitle">' + message + '</p>' +
+                '<p class="subtitle">' + options.message + '</p>' +
                 '<div class="control is-grouped">' +
                   '<div class="control is-expanded"></div>' +
                   buttonsHtml +
@@ -73,15 +77,19 @@
       }
 
       function confirm(message, noLabel, yesLabel) {
-        return dialog.show(message, [
-          {
-            label: noLabel || 'No',
-            class: 'is-link',
-          }, {
-            label: yesLabel || 'Yes',
-            class: 'is-primary',
-          }
-        ]);
+        return dialog.show({
+          message: message,
+          buttons: [
+            {
+              label: noLabel || 'No',
+              class: 'is-link',
+            },
+            {
+              label: yesLabel || 'Yes',
+              class: 'is-primary',
+            },
+          ],
+        });
       }
     }
 

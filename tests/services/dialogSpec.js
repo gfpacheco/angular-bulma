@@ -17,27 +17,33 @@ describe('bulma.services.dialog', function() {
 
   describe('#show', function() {
 
-    function callAndReturnModal(method, args) {
-      buDialog[method].apply(buDialog, args);
+    function digestAndGetModal() {
       $rootScope.$digest();
       return $document.find('.modal');
     }
 
     it('Renders one active modal with the bu-dialog class', function() {
-      var modal = callAndReturnModal('show');
+      buDialog.show();
+      var modal = digestAndGetModal();
       expect(modal.hasClass('is-active'));
       expect(modal.hasClass('bu-dialog'));
     });
 
     it('Renders the sent message inside a subtitle paragraph', function() {
-      var message = 'Message sent';
-      var modal = callAndReturnModal('show', [message]);
-      expect(modal.find('.subtitle').text()).to.equal(message);
+      var options = {
+        message: 'Message sent',
+      };
+      buDialog.show(options);
+      var modal = digestAndGetModal();
+      expect(modal.find('.subtitle').text()).to.equal(options.message);
     });
 
     it('Renders the default ok button if none sent', function() {
-      var message = 'Message sent';
-      var modal = callAndReturnModal('show', [message]);
+      var options = {
+        message: 'Message sent',
+      };
+      buDialog.show(options);
+      var modal = digestAndGetModal();
       var buttonsEl = modal.find('.button');
       expect(buttonsEl.length).to.equal(1);
       expect(buttonsEl.text()).to.equal('Ok');
@@ -45,31 +51,39 @@ describe('bulma.services.dialog', function() {
     });
 
     it('Renders the button with the label and class sent', function() {
-      var message = 'Message sent';
-      var buttons = [{
-        label: 'Yes',
-        class: 'is-info',
-      }];
-      var modal = callAndReturnModal('show', [message, buttons]);
+      var options = {
+        message: 'Message sent',
+        buttons: [
+          {
+            label: 'Yes',
+            class: 'is-info',
+          },
+        ],
+      };
+      buDialog.show(options);
+      var modal = digestAndGetModal();
       var buttonsEl = modal.find('.button');
       expect(buttonsEl.length).to.equal(1);
-      expect(buttonsEl.text()).to.equal(buttons[0].label);
-      expect(buttonsEl.hasClass(buttons[0].class));
+      expect(buttonsEl.text()).to.equal(options.buttons[0].label);
+      expect(buttonsEl.hasClass(options.buttons[0].class));
     });
 
     it('Returns a Promise that is resolved with the label of the clicked button', function() {
       var callback = sinon.spy();
-      buDialog.show('Message sent').then(callback);
-      $rootScope.$digest();
-      $document.find('.modal .button').eq(0).click();
+      var options = {
+        message: 'Message sent',
+      };
+      buDialog.show(options).then(callback);
+      var modal = digestAndGetModal();
+      modal.find('.button').eq(0).click();
       $rootScope.$digest();
       expect(callback).to.have.been.calledWith('Ok');
     });
 
     it('Removes the modal when any button is clicked', function() {
-      buDialog.show('Message sent');
-      $rootScope.$digest();
-      $document.find('.modal .button').eq(0).click();
+      buDialog.show();
+      var modal = digestAndGetModal();
+      modal.find('.button').eq(0).click();
       $rootScope.$digest();
       expect($document.find('.modal').length).to.equal(0);
     });
@@ -82,16 +96,19 @@ describe('bulma.services.dialog', function() {
       sinon.spy(buDialog, 'show');
       var message = 'Message sent';
       buDialog.confirm(message);
-      expect(buDialog.show.args[0][0]).to.equal(message);
-      expect(buDialog.show.args[0][1]).to.deep.equal([
-        {
-          label: 'No',
-          class: 'is-link',
-        }, {
-          label: 'Yes',
-          class: 'is-primary',
-        }
-      ]);
+      expect(buDialog.show.args[0][0]).to.deep.equal({
+        message: message,
+        buttons: [
+          {
+            label: 'No',
+            class: 'is-link',
+          },
+          {
+            label: 'Yes',
+            class: 'is-primary',
+          }
+        ]
+      });
       buDialog.show.restore();
     });
 
@@ -99,16 +116,19 @@ describe('bulma.services.dialog', function() {
       sinon.spy(buDialog, 'show');
       var message = 'Message sent';
       buDialog.confirm(message, 'Não', 'Sim');
-      expect(buDialog.show.args[0][0]).to.equal(message);
-      expect(buDialog.show.args[0][1]).to.deep.equal([
-        {
-          label: 'Não',
-          class: 'is-link',
-        }, {
-          label: 'Sim',
-          class: 'is-primary',
-        }
-      ]);
+      expect(buDialog.show.args[0][0]).to.deep.equal({
+        message: message,
+        buttons: [
+          {
+            label: 'Não',
+            class: 'is-link',
+          },
+          {
+            label: 'Sim',
+            class: 'is-primary',
+          }
+        ]
+      });
       buDialog.show.restore();
     });
 
