@@ -491,8 +491,9 @@
         return promise;
       }
 
-      function confirm(message, noLabel, yesLabel, isDanger) {
+      function confirm(title, message, noLabel, yesLabel, isDanger) {
         return dialog.show({
+          title: title,
           message: message,
           buttons: [
             {

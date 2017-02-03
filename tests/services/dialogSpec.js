@@ -117,9 +117,52 @@ describe('bulma.services.dialog', function() {
 
     it('Calls the show method with some predefined configs', function() {
       sinon.spy(buDialog, 'show');
-      var message = 'Message sent';
-      buDialog.confirm(message);
+      buDialog.confirm();
       expect(buDialog.show.args[0][0]).to.deep.equal({
+        title: undefined,
+        message: undefined,
+        buttons: [
+          {
+            label: 'No',
+            class: 'is-link',
+          },
+          {
+            label: 'Yes',
+            class: 'is-primary',
+          }
+        ]
+      });
+      buDialog.show.restore();
+    });
+
+    it('Calls the show method with title config', function() {
+      sinon.spy(buDialog, 'show');
+      var title = 'Title sent';
+      buDialog.confirm(title);
+      expect(buDialog.show.args[0][0]).to.deep.equal({
+        title: title,
+        message: undefined,
+        buttons: [
+          {
+            label: 'No',
+            class: 'is-link',
+          },
+          {
+            label: 'Yes',
+            class: 'is-primary',
+          }
+        ]
+      });
+      buDialog.show.restore();
+    });
+
+    it('Calls the show method with message config', function() {
+      sinon.spy(buDialog, 'show');
+      var title = 'Title sent';
+      var message = 'Message sent';
+      buDialog.confirm(title, message);
+      expect(buDialog.show.args[0][0]).to.deep.equal({
+        title: title,
         message: message,
         buttons: [
           {
@@ -137,9 +180,11 @@ describe('bulma.services.dialog', function() {
 
     it('Calls the show method with some predefined configs and the given labels', function() {
       sinon.spy(buDialog, 'show');
+      var title = 'Title sent';
       var message = 'Message sent';
-      buDialog.confirm(message, 'Não', 'Sim');
+      buDialog.confirm(title, message, 'Não', 'Sim');
       expect(buDialog.show.args[0][0]).to.deep.equal({
+        title: title,
         message: message,
         buttons: [
           {
@@ -157,9 +202,11 @@ describe('bulma.services.dialog', function() {
 
     it('Renders the second button with the is-danger class if isDanger argument is true', function() {
       sinon.spy(buDialog, 'show');
+      var title = 'Title sent';
       var message = 'Message sent';
-      buDialog.confirm(message, 'Não', 'Sim', true);
+      buDialog.confirm(title, message, 'Não', 'Sim', true);
       expect(buDialog.show.args[0][0]).to.deep.equal({
+        title: title,
         message: message,
         buttons: [
           {
