@@ -465,7 +465,7 @@
             '<div class="modal-background"></div>' +
             '<div class="modal-content">' +
               '<div class="box">' +
-                '<p class="subtitle">' + options.message + '</p>' +
+                (options.message ? '<p class="subtitle bu-dialog-message">' + options.message + '</p>' : '') +
                 '<div class="control is-grouped">' +
                   '<div class="control is-expanded"></div>' +
                   buttonsHtml +

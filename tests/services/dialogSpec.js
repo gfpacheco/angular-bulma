@@ -29,13 +29,20 @@ describe('bulma.services.dialog', function() {
       expect(modal.hasClass('bu-dialog'));
     });
 
-    it('Renders the sent message inside a subtitle paragraph', function() {
+    it('Renders the sent message inside the bu-dialog-message paragraph', function() {
       var options = {
         message: 'Message sent',
       };
       buDialog.show(options);
       var modal = digestAndGetModal();
-      expect(modal.find('.subtitle').text()).to.equal(options.message);
+      expect(modal.find('.bu-dialog-message').text()).to.equal(options.message);
+    });
+
+    it('Does not render any message if not sent', function() {
+      var options = {};
+      buDialog.show(options);
+      var modal = digestAndGetModal();
+      expect(modal.find('.bu-dialog-message').length).to.equal(0);
     });
 
     it('Renders the default ok button if none sent', function() {
