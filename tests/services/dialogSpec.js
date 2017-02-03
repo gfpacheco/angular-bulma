@@ -61,6 +61,15 @@ describe('bulma.services.dialog', function() {
       expect(modal.find('.bu-dialog-message').length).to.equal(0);
     });
 
+    it('Replaces \\n with <br> to improve message formatting', function() {
+      var options = {
+        message: 'First line.\nSecond line',
+      };
+      buDialog.show(options);
+      var modal = digestAndGetModal();
+      expect(modal.find('.bu-dialog-message br').length).to.equal(1);
+    });
+
     it('Renders the default ok button if none sent', function() {
       var options = {
         message: 'Message sent',

@@ -467,7 +467,10 @@
             '<div class="modal-content">' +
               '<div class="box">' +
                 (options.title ? '<p class="subtitle bu-dialog-title">' + options.title + '</p>' : '') +
-                (options.message ? '<p class="block bu-dialog-message">' + options.message + '</p>' : '') +
+                (options.message ?
+                  '<p class="block bu-dialog-message">' + options.message.replace('\n', '<br>') + '</p>' :
+                  ''
+                ) +
                 '<div class="control is-grouped">' +
                   '<div class="control is-expanded"></div>' +
                   buttonsHtml +
