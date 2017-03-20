@@ -125,6 +125,16 @@ a feature implemented as the minimum needed.
 <bu-timepicker ng-model="myTime"/>
 ```
 
+### Tooltip
+
+This is a port of [UI Bootstrap](https://angular-ui.github.io/bootstrap)'s tooltip component. To use
+add the `bu-tooltip` attribute to any element and it's value will be shown in a tooltip when the
+user passes the mouse over the element.
+
+```html
+<p>A paragraph with some <span bu-tooltip="Meaning of the fancy word">fancy</span> word.</p>
+```
+
 ## Contributing
 
 Again, this is an early stage project, any help is appreciated, feel free to open issues and submit
