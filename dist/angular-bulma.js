@@ -1887,7 +1887,7 @@
               '<div class="box">' +
                 (options.title ? '<p class="subtitle bu-dialog-title">' + options.title + '</p>' : '') +
                 (options.message ?
-                  '<p class="block bu-dialog-message">' + options.message.replace('\n', '<br>') + '</p>' :
+                  '<p class="block bu-dialog-message">' + options.message.replace(/\n/g, '<br>') + '</p>' :
                   ''
                 ) +
                 '<div class="control is-grouped">' +
