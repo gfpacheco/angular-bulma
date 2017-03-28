@@ -69,6 +69,7 @@
         );
 
         container.append(modal);
+        modal.find('button').eq(-1)[0].focus();
 
         var deferred = $q.defer();
         var promise = deferred.promise;
